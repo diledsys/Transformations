@@ -1,16 +1,12 @@
+using System;
 using UnityEngine;
 
-public class MoveRotateScaleCombo : MonoBehaviour
+public class ScalePulser : MonoBehaviour
 {
-    [Header("Move")]
-    [SerializeField] private float _moveSpeed = 2f;
-
-    [Header("Rotate")]
-    [SerializeField] private float _degreesPerSecond = 90f;
-
-    [Header("Scale")]
+    [Tooltip("Скорость пульсации")]
     [SerializeField] private float _pulseSpeed = 1f;
 
+    [Tooltip("Максимальный множитель")]
     [Min(1f)]
     [SerializeField] private float _maxScaleMultiplier = 1.5f;
 
@@ -23,12 +19,13 @@ public class MoveRotateScaleCombo : MonoBehaviour
 
     private void Update()
     {
-        transform.position += transform.forward * _moveSpeed * Time.deltaTime;
-        transform.Rotate(0f, _degreesPerSecond * Time.deltaTime, 0f, Space.Self);
+        PingPong();
+    }
 
+    private void PingPong()
+    {
         float phase = Mathf.PingPong(Time.time * _pulseSpeed, 1f);
         float normalizedPhase = Mathf.Lerp(1f, _maxScaleMultiplier, phase);
-
         transform.localScale = _startScale * normalizedPhase;
     }
 }
