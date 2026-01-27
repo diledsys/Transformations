@@ -26,9 +26,9 @@ public class MoveRotateScaleCombo : MonoBehaviour
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
         transform.Rotate(0f, degreesPerSecond * Time.deltaTime, 0f, Space.Self);
 
-        float t = Mathf.PingPong(Time.time * pulseSpeed, 1f);
-        float m = Mathf.Lerp(1f, maxScaleMultiplier, t);
+        float phase = Mathf.PingPong(Time.time * pulseSpeed, 1f);
+        float normalizedPhase = Mathf.Lerp(1f, maxScaleMultiplier, phase);
 
-        transform.localScale = _startScale * m;
+        transform.localScale = _startScale * normalizedPhase;
     }
 }

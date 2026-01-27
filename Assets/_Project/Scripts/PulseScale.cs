@@ -18,8 +18,8 @@ public class PulseScale : MonoBehaviour
 
     private void Update()
     {
-        float t = Mathf.PingPong(Time.time * pulseSpeed, 1f);
-        float m = Mathf.Lerp(1f, maxScaleMultiplier, t);
-        transform.localScale = _startScale * m;
+        float phase = Mathf.PingPong(Time.time * pulseSpeed, 1f);
+        float normalizedPhase = Mathf.Lerp(1f, maxScaleMultiplier, phase);
+        transform.localScale = _startScale * normalizedPhase;
     }
 }
