@@ -16,7 +16,9 @@ public class Mover : MonoBehaviour
 
     private void Forward()
     {
-        Vector3 dir = _useLocalForward ? transform.forward : Vector3.forward;
-        transform.position += dir * _moveSpeed * Time.deltaTime;
+        float delta = _moveSpeed * Time.deltaTime;
+        Space space = _useLocalForward ? Space.Self : Space.World;
+
+        transform.Translate(Vector3.forward * delta, space);
     }
 }
