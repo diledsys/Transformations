@@ -10,11 +10,15 @@ public class ScalePulser : MonoBehaviour
     [Min(1f)]
     [SerializeField] private float _maxScaleMultiplier = 1.5f;
 
-    private Vector3 _startScale;
+    private const float MinPulse = 0f;
+    private const float MaxPulse = 1f;
+    private const float BaseScaleMultiplier = 1f;
+
+    private Vector3 _baseScale;
 
     private void Awake()
     {
-        _startScale = transform.localScale;
+        _baseScale = transform.localScale;
     }
 
     private void Update()
@@ -24,8 +28,9 @@ public class ScalePulser : MonoBehaviour
 
     private void PingPong()
     {
-        float phase = Mathf.PingPong(Time.time * _pulseSpeed, 1f);
-        float normalizedPhase = Mathf.Lerp(1f, _maxScaleMultiplier, phase);
-        transform.localScale = _startScale * normalizedPhase;
+        float phase = Mathf.PingPong(Time.time * _pulseSpeed, MaxPulse);
+        float scaleMultiplier = Mathf.Lerp(BaseScaleMultiplier, _maxScaleMultiplier, phase);
+
+        transform.localScale = _baseScale * scaleMultiplier;
     }
 }

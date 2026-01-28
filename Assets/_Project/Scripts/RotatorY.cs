@@ -16,6 +16,6 @@ public class RotatorY : MonoBehaviour
     private void TurnAround()
     {
         float delta = _degreesPerSecond * Time.deltaTime;
-        transform.Rotate(0f, delta, 0f, _space);
+        transform.Rotate(Vector3.up * delta, _space);
     }
 }
